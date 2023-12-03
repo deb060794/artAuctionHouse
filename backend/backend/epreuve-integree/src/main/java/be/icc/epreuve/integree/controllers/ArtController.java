@@ -119,12 +119,16 @@ public class ArtController {
 
         }
         User user = authService.getCurrentUser().get();
-        user.getSoldArts().add(art);
+        List <Art> arts = user.getSoldArts();
+        arts.add(art);
+        user.setSoldArts(arts);
+        System.out.println(user.getRoles().toString());
         userService.update(user);
         art.setSeller(user);
-
         return new ResponseEntity<>(artService.insert(art), HttpStatus.CREATED);
     }
+
+
 
     @PostMapping("admin/lot-create")
     public ResponseEntity<?> createLot(@RequestBody AuctionLot lot){

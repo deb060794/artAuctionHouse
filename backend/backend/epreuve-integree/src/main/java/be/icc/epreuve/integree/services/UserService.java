@@ -36,31 +36,6 @@ public class UserService {
     }
 
     public User update( User user){
-        if(repository.findById(user.getId()).isPresent()) {
-            User oldinfo = repository.findById(user.getId()).get();
-            user.setPassword(oldinfo.getPassword());
-            user.setEmail(oldinfo.getEmail());
-            user.setSoldArts(oldinfo.getSoldArts());
-            user.setOrders(oldinfo.getOrders());
-            user.setDeactivate(oldinfo.isDeactivate());
-            user.setArticleComments(oldinfo.getArticleComments());
-            user.setBids(oldinfo.getBids());
-            user.setArtComments(oldinfo.getArtComments());
-            List<Role> roles = oldinfo.getRoles();
-            user.getRoles().forEach(role -> {
-                if (role.equals("admin")) {
-                    Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                    roles.add(adminRole);
-                } else {
-                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                    roles.add(userRole);
-                }
-
-            });
-                    user.setRoles(roles);
-        }
         return repository.save(user);
     }
 

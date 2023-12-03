@@ -74,6 +74,7 @@ public class WebSecurityConfig {
           auth.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                   .requestMatchers("/api/auth/forgot-Password").permitAll()
                   .requestMatchers("/api/auth/reset-password").permitAll()
+                  .requestMatchers("/api/art-create)").permitAll()
                   .requestMatchers("/api/posts/**").permitAll()
                   .requestMatchers("/api/post/**").permitAll()
                   .requestMatchers("/api/stripe/**").permitAll()
