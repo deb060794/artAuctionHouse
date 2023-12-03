@@ -47,7 +47,7 @@ export class UserArtComponent {
     if (this.currentUser && this.currentUser.id) {
       this.userService.myarts(this.currentUser.id).subscribe(
        data => {
-        this.dataSource.data = this.artList;
+        this.dataSource.data = data;
         this.dataSource.paginator = this.paginator; 
         this.paginator.pageIndex = 0;
         if (this.dataSource.paginator) {
