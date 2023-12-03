@@ -1,1 +1,23 @@
-<p>user-articles works!</p>
+<app-user-navigation></app-user-navigation>
+<div class="container">
+    <h2 class="text-center mt-3" i18n>My Posts</h2>
+    <div class="text-center mb-4">
+        <button i18n><a href="blog/add-blog" class="new-post">Add Post</a></button>
+      </div>
+      
+      <div class="row">
+        <ng-container *ngFor="let post of posts | async">
+        <div class="col-md-3 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title" i18n><a href="blog/post/{{post.id}}" class="blog-title">{{post.title}}</a></h5>
+                <h6 class="card-subtitle mb-2 text-muted" i18n><i class="fas fa-user"></i> Author: {{post.username}}</h6>
+                <p class="card-text" [innerHTML]="post.content | slice:0:100"i18n></p>
+                <a href="blog/post/{{post.id}}" class="btn btn-primary"i18n>Read More</a>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+</div>
+

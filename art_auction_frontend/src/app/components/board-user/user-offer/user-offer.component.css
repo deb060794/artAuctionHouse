@@ -10,3 +10,36 @@ row.justify-content-center {
 .container{
   align-content: center;
 }
+
+/* Layout structure using Flexbox */
+.main-layout {
+  display: flex;
+}
+
+/* Sidebar CSS */
+app-user-navigation {
+  width: 250px; /* Fixed width for sidebar */
+  position: fixed; /* Fixed position */
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto; /* Scroll for longer content */
+}
+
+/* Main content area CSS */
+.container {
+  margin-left: 250px; /* Space for sidebar */
+  width: calc(100% - 250px); /* Adjust width */
+  padding: 20px; /* Optional padding */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  app-user-navigation {
+      width: 100px;
+  }
+  .container {
+      margin-left: 100px;
+      width: calc(100% - 100px);
+  }
+}

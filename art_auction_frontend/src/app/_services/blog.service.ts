@@ -28,4 +28,7 @@ export class BlogService {
   getPostComments(permaLink:Number):Observable<Array<Comment>>{
     return this.httpClient.get<Array<Comment>>(API_URL +  permaLink +"/comments");
   }
+  getMyPosts(userId: Number): Observable<Array<BlogPayload>>{
+    return this.httpClient.get<Array< BlogPayload>>(API_URL + "myPosts/" + userId);
+  }
 }

@@ -12,4 +12,5 @@ export class Bid {
     state!: BidState;
     isHighestBidder?: boolean ;
     isAuctionEnded?: boolean;
+    remainingTime?: string;
 } 

@@ -1,0 +1,28 @@
+/* Layout structure using Flexbox */
+.main-layout {
+    display: flex;
+    flex-wrap: nowrap; /* Prevents wrapping of items */
+}
+
+.container {
+    margin-left: 250px;
+    padding: 20px;
+}
+app-user-navigation {
+    width: 250px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+
+@media (max-width: 768px) {
+    app-user-navigation {
+        width: 100px;
+    }
+    .container {
+        margin-left: 100px;
+    }
+}
+
