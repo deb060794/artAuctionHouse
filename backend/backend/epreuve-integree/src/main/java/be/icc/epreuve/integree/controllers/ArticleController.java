@@ -68,4 +68,15 @@ public class ArticleController {
     public ResponseEntity<?> updateArticle(@RequestBody ArticleDto article) {
         return new ResponseEntity<>(articleService.updateArticle(article), HttpStatus.CREATED);
     }
+
+    @GetMapping("/myPosts/{id}")
+    public ResponseEntity<List<ArticleDto>> readMyArticles(@PathVariable("id") Long id){
+        try {
+            List<ArticleDto> articleComments = articleService.showMyArticles(id);
+            return new ResponseEntity<>(articleComments, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

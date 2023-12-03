@@ -81,4 +81,10 @@ public class ArticleService {
 
         repository.deleteById(id);
     }
+
+    public List<ArticleDto> showMyArticles(Long id) {
+        User user = userService.get(id).get();
+        List<Article> articles = repository.findAll();
+        return articles.stream().filter(article -> article.getUser().equals(user)).map(this::mapFromArticleToDto).collect(toList());
+    }
 }
