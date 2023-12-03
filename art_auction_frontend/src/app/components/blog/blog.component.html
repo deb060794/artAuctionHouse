@@ -1,0 +1,30 @@
+<div class="content">
+  <div class="container">
+    <!-- Centered Heading -->
+    <h1 class="text-center" i18n>Welcome to the Blog</h1>
+    
+    <div class="text-center mb-4">
+      <button i18n><a href="blog/add-blog" class="new-post">Add Post</a></button>
+    </div>
+
+    <!-- Display Posts in Cards -->
+    <div class="row">
+      <ng-container *ngFor="let post of posts | async">
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" i18n><a href="blog/post/{{post.id}}" class="blog-title">{{post.title}}</a></h5>
+              <h6 class="card-subtitle mb-2 text-muted" i18n><i class="fas fa-user"></i> Author: {{post.username}}</h6>
+              <p class="card-text" [innerHTML]="post.content | slice:0:100"i18n></p>
+              <a href="blog/post/{{post.id}}" class="btn btn-primary"i18n>Read More</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Angular Material Pagination -->
+    <mat-paginator [length]="totalPosts" [pageSize]="16" [pageSizeOptions]="[16, 32, 64]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+

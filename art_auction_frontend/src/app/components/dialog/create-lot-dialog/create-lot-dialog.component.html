@@ -1,0 +1,39 @@
+<h2 mat-dialog-title i18n>Add new Lot</h2>
+
+<div mat-dialog-content>
+  <form [formGroup]="formLot">
+
+    <h3 i18n>When should the auction start?</h3>
+      <mat-form-field class="full-width">
+        <mat-label i18n>Auction Start Date</mat-label>
+        <input matInput [matDatepicker]="pickerStart" formControlName="auctionStartDate" placeholder="mm/dd/yyyy" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+        <mat-error *ngIf="formLot.controls['auctionStartDate'].invalid">A valid date is required.</mat-error>
+      </mat-form-field>
+    
+
+
+
+    <h3 i18n>When should the auction end?</h3>
+    <mat-form-field class="full-width">
+      <mat-label i18n>Auction End Date</mat-label>
+      <input matInput [matDatepicker]="pickerEnd" formControlName="auctionEndDate" placeholder="mm/dd/yyyy" required>
+      <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+      <mat-datepicker #pickerEnd></mat-datepicker>
+      <mat-error *ngIf="formLot.controls['auctionEndDate'].invalid">A valid date is required.</mat-error>
+    </mat-form-field>
+
+   
+  </form>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="createLot()" [disabled]="!formLot.valid" i18n>Create</button>
+  <button mat-button (click)="dialogRef.close()" i18n>Cancel</button>
+</div>
+

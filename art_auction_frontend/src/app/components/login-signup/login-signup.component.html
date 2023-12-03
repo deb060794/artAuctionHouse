@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="login-section">
+    <div class="card card-container">
+      <h2 class="section-label">Login</h2>
+      <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="form-group">
+            <label for="username" i18n>Username</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }"/>
+            <div *ngIf="f.submitted && username.errors" class="invalid-feedback" i18n>
+              Username is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password" i18n>Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              [(ngModel)]="form.password"
+              required
+              minlength="6"
+              #password="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+            />
+            <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
+              <div *ngIf="password.errors['required']" i18n>Password is required</div>
+              <div *ngIf="password.errors['minlength']"i18n>
+                Password must be at least 6 characters
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" i18n>
+              Login
+            </button>
+          </div>
+          <div class="form-group">
+            <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert"i18n>
+              Login failed: {{ errorMessage }}
+            </div>
+          </div>
+        </form>
+        
+    </div>
+    <div *ngIf="isLoggedIn" class="alert alert-success">
+      Login successful! Redirecting...
+    </div>
+    <div class="other-options">
+      <a href="/forgot-password" class="nav-link" routerLink="forgot-password" i18n>Forgot Password?</a>
+      <a href="/register" class="nav-link" routerLink="register" i18n>Not registered? Sign Up</a>
+    </div>
+    
+</div>
+

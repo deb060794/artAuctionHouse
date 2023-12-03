@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+
+.navbar-logo {
+    height: 50px;
+    
+  }
+  .navbar-brand {
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .navbar-custom-color{
+    background-color: #112546;
+    height:50px;
+    margin-top: auto;
+  }
+
+  .navbar-custom-color-footer{
+    background-color: #112546;
+    height:150px;
+    margin-top: auto;
+  }
+
+  .nav-link {
+    border: 1px solid #D4AF37; 
+    border-radius: 5px; 
+    padding: 5px; 
+    margin: 5px; 
+    color: #fff; 
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  .input-group .form-control {
+    background-color: transparent; 
+    border: 1px solid #D4AF37; 
+    border-radius: 5px; 
+    padding: 5px; 
+  }
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  .content {
+    flex: 1;
+  }
+
+  .wishlist-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px;
+    outline: none;
+    position: absolute;
+    top: 10px;     /* Adjust this value to move the heart up or down */
+    right: 5px;   /* Adjust this value to move the heart right or left */
+    padding: 8px;  /* This will give some space around the heart */
+    border-radius: 50%;  /* Makes the border rounded */
+    color: #D4AF37;
+}
+
+.fa-heart {
+    color: #D4AF37;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

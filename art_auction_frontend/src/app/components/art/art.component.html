@@ -1,0 +1,45 @@
+<h1 style="text-align:center"i18n>All Artworks</h1>
+
+
+<div class="d-flex justify-content-between align-items-center">
+  <div i18n>Show: 
+    <select [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange()" class="select-items-per-page">
+      <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+    </select> items
+  </div>
+
+
+  <pagination-controls (pageChange)="setCurrentPage($event)" [maxSize]="maxSize"></pagination-controls>
+</div>
+
+<div class="art-gallery flex-container">
+  <div *ngFor="let art of arts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }" class="art-card-container">
+    <div class="d-flex flex-column align-items-center">
+      
+      <div class="image-container" (click)="navigateToArt(art.id)">
+        <img [src]="art.imageUrl.replace('\\\\', '/')" class="d-block w-100" alt="{{ art.title }}" style="height: 300px; width: 300px; object-fit: cover;">
+        
+      </div>
+      
+      <div>
+        <h5><span class="italic bold">{{ art.title }}</span></h5>
+        <h5 i18n>Starting Price: {{ art.initialPrice | currency:'EUR':'symbol':'1.2-2'  }} </h5>
+      </div>
+      <div *ngIf="art.state == 'INAUCTION'" class="card-bottom">
+        <h5 i18n>Time Remaining: {{ calculateDaysRemaining(art.endDate) }} days</h5>
+      </div>
+      <div>
+        <button *ngIf="art.state == 'INAUCTION'" class="btn btn-custom" (click)="placeBid(art)" i18n>Bid</button>
+        <button *ngIf="art.state =='PUBLISHED'" class="btn btn-custom" (click)="makeOffer(art)" i18n>Make an offer</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+      
+
+
+
+
+

@@ -1,0 +1,50 @@
+<form [formGroup]="form" (ngSubmit)="editUser()" #f="ngForm" novalidate>
+    <h2 mat-dialog-title i18n>User Details</h2>
+  
+    <mat-dialog-content class="mat-typography">
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        <strong i18n>Error!</strong> {{errorMessage}}
+      </div>
+  
+      <mat-form-field class="full-width">
+        <mat-label i18n>Firstname</mat-label>
+        <input matInput formControlName="firstname" placeholder="firstname" required>
+        <mat-error *ngIf="form.controls['firstname'].invalid" i18n>A valid name is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label i18n>Lastname</mat-label>
+        <input matInput formControlName="lastname" placeholder="lastname" required>
+        <mat-error *ngIf="form.controls['lastname'].invalid" i18n>A valid name is required.</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width">
+        <mat-label i18n>Username</mat-label>
+        <input matInput formControlName="username" placeholder="Username" required>
+        <mat-error *ngIf="form.controls['username'].invalid" i18n>A valid username is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label i18n>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Address" required>
+        <mat-error *ngIf="form.controls['address'].invalid" i18n>A valid username is required.</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width">
+        <mat-label i18n>User Roles</mat-label>
+        <mat-select formControlName="roles" multiple required>
+          <mat-option *ngFor="let role of roles" [value]="role">{{role.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['roles'].invalid" i18n>At least one role is required.</mat-error>
+      </mat-form-field>
+      
+  
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close i18n>Close</button>
+      <button mat-button color="primary" type="submit" i18n>Save Changes</button>
+    </mat-dialog-actions>
+  </form>
+  
+  

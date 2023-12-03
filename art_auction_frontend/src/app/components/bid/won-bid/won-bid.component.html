@@ -1,0 +1,7 @@
+<h1 i18n>Congratulations!</h1>
+<div *ngIf="art">
+    <h2>{{ art.title }}</h2>
+    <img [src]="art.imageUrl" alt="{{ art.title }}">
+    <p>{{ art.description }}</p>
+    <button (click)="addToCart()" i18n>Add to Shopping Bag</button>
+</div>

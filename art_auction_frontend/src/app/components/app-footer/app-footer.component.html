@@ -1,0 +1,63 @@
+
+<footer class="footer">
+    <nav class="navbar navbar-expand navbar-custom-color-footer">
+        <div class="container-fluid"> 
+            <div class="row"> 
+
+                <!-- Newsletter Section -->
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-object mb-3">
+                    <h4 class="footer-items">Subscribe to our Newsletter</h4>
+                    <form (submit)="subscribeToNewsletter(email.value)">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email" #email required>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Customer Service Section -->
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-object mb-3">
+                    <h4 class="footer-items">Customer Service</h4>
+                    <a href="/general-conditions">
+                        <h5 class="footer-items">General Terms and Conditions</h5>
+                    </a>
+                    <a href="/general-warranty">
+                        <h5 class="footer-items">Terms of guarantee</h5>
+                    </a>
+                </div>
+
+                <!-- Buying Art Section -->
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-object mb-3">
+                    <h4 class="footer-items">Buying</h4>
+                    <a href="/general-conditions">
+                        <h5 class="footer-items">Buying Art</h5>
+                    </a>
+                    <a href="/general-warranty">
+                        <h5 class="footer-items">Special Auctions</h5>
+                    </a>
+                </div>
+
+                <!-- Selling Art Section -->
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-object mb-3">
+                    <h4 class="footer-items">Selling Art</h4>
+                    <a href="/general-conditions">
+                        <h5 class="footer-items">Auction tips</h5>
+                    </a>
+                    <a href="/general-warranty">
+                        <h5 class="footer-items">Auction results</h5>
+                    </a>
+                </div>
+
+                <!-- Contact Us Section -->
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 footer-object mb-3">
+                    <a href="/contact-us">
+                        <h4 class="footer-items">Contact Us</h4> 
+                    </a>
+                </div>
+
+            </div> 
+        </div>
+    </nav>
+</footer>

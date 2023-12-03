@@ -1,0 +1,38 @@
+<app-user-navigation></app-user-navigation>
+<div class="container">
+    <h2 class="text-center mt-3">My Offers</h2>
+
+    <!-- Filter Dropdown -->
+    <div class="text-center mb-4">
+        <select class="form-select w-auto d-inline-block" (change)="onFilterChange($event)">
+            <option value="made">Offers Made</option>
+            <option value="received">Offers Received</option>
+        </select>
+        
+    </div>
+    <div *ngIf="offers && offers.length > 0; else noOffersTemplate">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let offer of offers">
+                    <img [src]="offer.art.imageUrl.replace('\\\\', '/')" class="card-img-top" alt="{{ offer.art.title }}" (click)="makeAnOffer(offer.art.id)" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ offer.art.title }}</h5>
+                        <p class="card-text">Offer Price: <strong>{{ offer.amount | currency:'EUR':'symbol':'1.2-2' }}</strong></p>
+                        <p class="card-text">Offer Date: {{ offer.bidDate | date:'medium' }}</p>
+                        
+                        <ng-container *ngIf="offer.state == accepted; else offerAgain">
+                            <button type="button" class="btn btn-primary" (click)="addToCart(offer.art.id, offer.amount)">Add to Cart</button>
+                        </ng-container>
+                        <ng-template #offerAgain>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="makeAnOffer(offer.art.id)">Make another offer</button>
+                        </ng-template>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #noOffersTemplate>
+            <p class="text-center">No offers yet.</p>
+        </ng-template>
+    </div>
+    

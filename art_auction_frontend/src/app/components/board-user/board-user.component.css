@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    }
+    
+    .custom-container {
+    margin-left: 100px;
+    margin-top: 60px;
+    width: calc(100% - 100px);
+    overflow: auto; 
+    }
+    
+    .custom-btn-link{
+    margin-left: 5px;
+    color: #fff;
+    }
+    
+    .custom-mat-cell{
+    width: 120px;
+    }
+    
+    .custom-brand{
+    width: 100%;
+    align-content: center;
+    text-align: center;
+    padding: 10px;
+    }
+    
+    .btn-custom-link{
+    color: #fff!important;
+    display: block;
+    margin-bottom: 5px;
+    }
+    

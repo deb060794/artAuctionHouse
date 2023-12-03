@@ -1,0 +1,50 @@
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="blog-title" i18n>{{post.title}}</h1>
+            <span>
+              <p i18n>by {{post.username}}</p>
+            </span>
+            <hr>
+            <p [innerHTML]="post.content" i18n></p>
+          </div>
+        </div>
+        <div class="comments-section">
+          <hr>
+          <h3>Comments</h3>
+          <div class="add-comment-section">
+            <h4>Add a Comment</h4>
+          
+           
+            <div *ngIf="loggedIn; else showLogin">
+              <textarea class="form-control" [(ngModel)]="newComment" rows="3" placeholder="Write your comment here..."></textarea>
+              <button class="btn btn-primary mt-2" (click)="submitComment()">Submit Comment</button>
+            </div>
+          
+            
+            <ng-template #showLogin>
+              <textarea class="form-control" [(ngModel)]="newComment" rows="3" placeholder="Write your comment here..."></textarea>
+              <button class="btn btn-primary" (click)="redirectToLogin()">Log In to Comment</button>
+            </ng-template>
+          </div>
+          <div *ngFor="let comment of comments" class="comment">
+            <div class="card mb-2">
+              <div class="card-body">
+                <h5 class="card-title">{{comment.writerName}}</h5>
+                <p class="card-text">{{comment.content}}</p>
+                <button *ngIf="isAdmin" class="btn btn-danger btn-sm" (click)="deleteComment(comment.id!)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+

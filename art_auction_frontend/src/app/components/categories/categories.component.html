@@ -1,0 +1,18 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let category of categories; let i = index;">
+      <div class="card mb-4" (click)="navigateToCategoryArtists(category.id)">
+        <img [src]="category.imageUrl" class="card-img-top" alt="{{ category.category }}" style="height: 400px; object-fit: cover; object-position: center;">
+        <div class="card-body">
+          <h5 class="card-title" style="font-size: 20px;">{{ category.category }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  

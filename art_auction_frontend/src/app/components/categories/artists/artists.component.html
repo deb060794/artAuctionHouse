@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-4">
+        <div class="btn-group" role="group" aria-label="Alphabet Filters">
+          <button class="btn btn-primary transparent-btn" *ngFor="let letter of alphabetLetters" (click)="applyFilter(letter)">
+            {{ letter }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+    <div *ngIf="selectedFilter">
+      <div class="row">
+        <div class="col-md-6" *ngFor="let artist of filteredArtists">
+          <div class="card mb-4" (click)="navigateToArtist(artist.id)">
+            <img [src]="artist.image_url" class="card-img-top" alt="{{ artist.name }}" style="max-height: 400px; object-fit: contain;">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 20px;">{{ artist.name }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+    
+    <div *ngIf="!selectedFilter">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let artist of sortedArtists">
+          <div class="card mb-4" (click)="navigateToArtist(artist.id)">
+            <img [src]="artist.image_url" class="card-img-top" alt="{{ artist.name }}" style="height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 20px;">{{ artist.name }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
+  

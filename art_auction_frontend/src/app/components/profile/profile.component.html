@@ -1,0 +1,45 @@
+<div class="container d-flex justify-content-center" *ngIf="user">
+  <mat-card class="profile-card">
+      <mat-card-header>
+          <mat-card-title>
+              <h3>
+                  <strong>{{ user.username }}</strong>'s Profile
+              </h3>
+          </mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content>
+          <form>
+              <mat-form-field appearance="fill" class="w-100 mb-2">
+                  <mat-label>First Name</mat-label>
+                  <input matInput [(ngModel)]="user.firstname" name="firstName">
+              </mat-form-field>
+              
+              <mat-form-field appearance="fill" class="w-100 mb-2">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput [(ngModel)]="user.lastname" name="lastName">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-2">
+                <mat-label>Username</mat-label>
+                <input matInput [(ngModel)]="user.username" name="username">
+            </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-2">
+                  <mat-label>Email</mat-label>
+                  <input matInput [(ngModel)]="user.email" name="email">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="w-100 mb-2">
+                <mat-label>Adress</mat-label>
+                <input matInput [(ngModel)]="user.address" name="address">
+            </mat-form-field>
+
+
+              <button mat-raised-button color="primary" (click)="modifyUser()">Modify</button>
+          </form>
+      </mat-card-content>
+  </mat-card>
+</div>
+  
+ 

@@ -1,0 +1,45 @@
+
+.footer{
+  justify-content:center; 
+  align-items: center; 
+  background-color: #112546;
+  height: 100px;
+  
+  margin-top: auto; 
+}
+
+.container-fluid {
+  width: 100%; 
+  justify-content: center; 
+}
+
+
+
+.form-control {
+width: 100%; 
+border: 1px solid #D4AF37;
+}
+
+.btn-primary {
+background-color: #112546;
+border-color: #112546;
+border: 1px solid #D4AF37; 
+}
+
+.btn-primary:hover {
+background-color: #0a1f3b; 
+border-color: #0a1f3b;
+}
+
+.footer-items {
+color: #D4AF37;
+white-space: nowrap;
+margin:8px;
+}
+
+.row {
+  gap : 2.8rem;
+}
+
+
+

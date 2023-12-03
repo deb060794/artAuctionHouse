@@ -1,0 +1,30 @@
+.btn-custom {
+    background-color: #112546;
+    border-color: #FFD700; 
+    color: #fcf9f9; 
+    width: 100px;
+    z-index: 1000;
+  }
+
+  .image-container {
+    margin-bottom: 20px;
+    height: 300px; /* Adjust the desired height as needed */
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .italic {
+    font-style: italic;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+
+  
+  

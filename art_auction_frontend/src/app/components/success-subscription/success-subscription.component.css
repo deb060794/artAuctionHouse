@@ -1,0 +1,23 @@
+.subscription-success-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    text-align: center;
+}
+
+h2 {
+    color: #112546;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #D4AF37;
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #fff;
+}

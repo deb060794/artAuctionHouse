@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="text-center mt-3">Currently in Auction</h2>
+  <div *ngIf="arts.length > 0; else noArtsTemplate">
+    <carousel [itemsPerSlide]="4">
+      <slide *ngFor="let art of arts">
+        <div class="d-flex flex-column align-items-center">
+          <div class="image-container">
+            <img [src]="art.imageUrl.replace('\\\\', '/')" class="d-block w-100" alt="{{ art.title }}" style="height: 300px; object-fit: cover;" (click)="placeBid(art.id)">
+          </div>
+          <div class="mt-2">
+            <h5><span class="italic bold">{{ art.title }}</span></h5>
+            <h5>
+              Current Price:
+              <strong>
+                {{
+                  (art.highestBid?.amount || art.initialPrice) | currency:'EUR':'symbol':'1.2-2'
+                }}
+              </strong>
+            </h5>
+            <!-- Display time remaining -->
+            <h5>Time Remaining: {{ art.timeRemaining }}</h5>
+            <!-- Display number of bids in bold -->
+            <h5>Number of Bids: <strong>{{ art.numberOfBids }}</strong></h5>
+          </div>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+  <ng-template #noArtsTemplate>
+    <p>No arts currently in auction.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,19 @@
+<div class="arts-container">
+    <div *ngFor="let art of artResults" class="art-item">
+      <div class="d-flex flex-column align-items-center">
+          <div class="image-container">
+              <img [src]="art.imageUrl.replace('\\\\', '/')" class="d-block w-100" alt="{{ art.title }}" style="height: 300px; object-fit: cover;" (click)="placeBid(art.id)">
+          </div>
+          <div class="mt-2">
+              <h5><span class="italic bold">{{ art.title }}</span></h5>
+              <h5 i18n>Starting Price: {{ art.initialPrice }} EUR</h5>
+              <h5 i18n>Time Remaining: {{ calculateDaysRemaining(art.endDate) }} days</h5>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="artResults.length === 0">
+      No results found.
+  </div>
+  

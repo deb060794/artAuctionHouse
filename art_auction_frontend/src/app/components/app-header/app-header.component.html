@@ -1,0 +1,85 @@
+<div id="app">
+  <nav class="navbar navbar-expand navbar-custom-color container-fluid">
+    <a href="#" class="navbar-brand">
+      <img src="assets/images/logo.png" alt="Logo" class="navbar-logo" i18n-alt="Logo alt text"> 
+    </a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/categories" class="nav-link" routerLink="categories" i18n>Artists</a>
+      </li>
+      <li class="nav-item">
+        <a href="/Art" class="nav-link" routerLink="artworks" i18n>Artworks</a>
+      </li>
+      <li class="nav-item">
+        <a href="/blog" class="nav-link" routerLink="blog" i18n>Blog</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link" routerLink="admin" i18n>Admin Board</a>
+      </li>
+      <li class="nav-item">
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user" i18n>User</a>
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0 ml-auto" (submit)="search()">
+      <div class="input-group">
+          <input [(ngModel)]="searchTerm" name="searchTerm" class="form-control search-input mr-sm-2" type="search" placeholder="search art" aria-label="Search" i18n-placeholder="Search placeholder">
+          <button class="search-btn" type="submit">Search</button>
+      </div>
+  </form>
+  
+  
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/login-signup" class="nav-link" routerLink="login-signup" i18n><i class="fas fa-user"></i></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="/wishlist" class="nav-link" routerLink="wishlist" i18n><i class="fas fa-heart"></i></a>
+      </li>
+      <li class="nav-item">
+        <a href="/cart" class="nav-link" routerLink="cart" i18n>
+          <i class="fas fa-shopping-cart"></i>
+          <span *ngIf="itemCount > 0" class="cart-count">{{ itemCount }}</span>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile" i18n>Profile</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" routerLink="login" (click)="logout()" i18n>Logout</a>
+      </li>
+    </ul>
+    <div class="nav-link">
+      <div class="btn-group" dropdown>
+        <button style="color: #112546;">
+          <i class="fa fa-globe" aria-hidden="true"></i>
+          {{ siteLanguage }}
+          <span class="caret"></span>
+        </button>
+        <ul
+          id="dropdown-animated"
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right"
+          role="menu"
+          aria-labelledby="button-animated"
+          style="background-color: #112546; color: #ffffff;" >
+          <ng-container *ngFor="let language of languageList">
+            <li role="menuitem">
+              <a
+                class="dropdown-item"
+                (click)="changeSiteLanguage(language.code)"
+                style="color: #ffffff;" >
+                {{ language.label }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>        
+      </div>
+    </div>
+  </nav>
+</div>

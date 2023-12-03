@@ -1,0 +1,22 @@
+<form [formGroup]="formArt" (ngSubmit)="startAuction()" #f="ngForm" novalidate>
+  <h2 mat-dialog-title>Modify Art Details</h2>
+  <mat-dialog-content class="mat-typography">
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      <strong i18n>Error!</strong> {{errorMessage}}
+    </div>
+    <h3 i18n>When should the art be put in auction?</h3>
+    <mat-form-field class="full-width">
+      <mat-label>Select Lot</mat-label>
+      <mat-select formControlName="lot" required>
+        <mat-option *ngFor="let lot of lots" [value]="lot.id">
+          ({{ lot.startDate | date }} - {{ lot.endDate | date }})
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formArt.get('lot')?.invalid">Selecting a lot is required.</mat-error>
+    </mat-form-field>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close i18n>Close</button>
+    <button mat-button color="primary" type="submit" [disabled]="!formArt.valid">Save Changes</button>
+  </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

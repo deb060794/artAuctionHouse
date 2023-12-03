@@ -1,0 +1,35 @@
+
+
+<app-admin-navigation></app-admin-navigation>
+<div class="container custom-container">
+  <div class="card-deck">
+    <div class="card" style="width: 18rem;">
+      <div class="custom-brand"> <span class="fa fa-user"></span></div>
+      <div class="card-body">
+        <h5 class="card-title"i18n>Total Users</h5>
+        <p class="card-text"i18n>The number of users is <strong>{{userCount}}</strong>.</p>
+        <a href="/userList" class="btn btn-primary btn-custom-link"i18n>Detail</a>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <div class="custom-brand"><span class="fa fa-th-large"></span></div>
+      <div class="card-body">
+        <h5 class="card-title"i18n>Total Artworks</h5>
+        <p class="card-text"i18n>The number of artworks is <strong>{{artCount}}</strong></p>
+        <a href="/artList" class="btn btn-primary btn-custom-link"i18n>Detail</a>
+      </div>
+    </div>
+
+
+    <div class="card" style="width: 18rem;">
+      <div class="custom-brand"><span class="fa fa-euro"></span></div>
+      <div class="card-body">
+        <h5 class="card-title"i18n>Total Purchases</h5>
+        <p class="card-text"i18n>The number of purchases is <strong>{{orderCount}}</strong></p>
+        <a href="/orderList" class="btn btn-primary btn-custom-link"i18n>Detail</a>
+      </div>
+    </div>
+  </div>
+</div>
+

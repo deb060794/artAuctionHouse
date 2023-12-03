@@ -1,0 +1,28 @@
+<nav class="navbar custom-vertical-nav navbar-custom-color nav-pills nav-fill">
+    <ul class="navbar-nav custom-navbar-nav">
+      <li class="nav-item" >
+        <a href="/dashboard" class="nav-link" [class.active]="router.url==='/dashboard'">
+          <span class="fa fa-home"></span>
+          <span i18n>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item" >
+        <a href="/userList" class="nav-link" [class.active]="router.url==='/userList'">
+          <span class="fa fa-user"></span>
+          <span i18n>Manage Users</span>
+        </a>
+      </li>
+      <li class="nav-item" >
+        <a href="/artList" class="nav-link" [class.active]="router.url==='/artList'">
+          <span class="fa fa-th-large"></span>
+          <span i18n>Manage Artworks</span>
+        </a>
+      </li>
+      <li class="nav-item" >
+        <a href="/orderList" class="nav-link" [class.active]="router.url==='/orderList'">
+          <span class="fa fa-euro"></span>
+          <span i18n>Manage Orders</span>
+        </a>
+      </li>
+    </ul>
+  </nav>

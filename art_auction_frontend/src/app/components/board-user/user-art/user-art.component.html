@@ -1,0 +1,81 @@
+<app-user-navigation></app-user-navigation>
+<div class="container custom-container">
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      <strong i18n>Error!</strong> {{errorMessage}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-success" *ngIf="infoMessage">
+      <strong i18n>Successful!</strong> {{infoMessage}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="dataSource">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col col-xs-6">
+                <h3 class="panel-title">My Artworks</h3>
+              </div>
+              <div class="col col-xs-6 text-right">
+                <button type="button" class="btn btn-primary" (click)="createNewArtRequest()" i18n>Add New Artwork</button>
+              </div>
+            </div>
+          </div>
+    
+          <div class="card-body">
+            <table mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Art Id</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>title</th>
+                <td mat-cell *matCellDef="let element">{{element.title}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="artist">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Artist</th>
+                <td mat-cell *matCellDef="let element">{{element.artist?.name}}</td>
+
+              </ng-container>
+            
+
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Price</th>
+                <td mat-cell *matCellDef="let element">{{element.initialPrice}} &euro;</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>State</th>
+                <td mat-cell *matCellDef="let element">{{element.state}}</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Actions</th>
+                <td mat-cell *matCellDef="let element" style="width:140px;">
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon> 
+                  </button>
+              
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="editArtRequest(element)">
+                      <mat-icon>edit</mat-icon>
+                      <span i18n>Edit</span>
+                    </button>
+                  </mat-menu>
+                </td>
+              </ng-container>
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  

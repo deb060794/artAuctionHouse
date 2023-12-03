@@ -1,0 +1,12 @@
+row.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+.form-select.w-auto {
+  display: inline-block; 
+}
+
+.container{
+  align-content: center;
+}

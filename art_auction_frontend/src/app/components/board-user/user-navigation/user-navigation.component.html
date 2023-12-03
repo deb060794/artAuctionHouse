@@ -1,0 +1,42 @@
+<nav class="navbar custom-vertical-nav navbar-custom-color nav-pills nav-fill">
+    <ul class="navbar-nav custom-navbar-nav">
+      <li class="nav-item" >
+        <a href="/user/dashboard" class="nav-link" [class.active]="router.url==='/user/dashboard'">
+          <span class="fa fa-home"></span>
+          <span i18n>User Dashboard </span>
+        </a>
+      </li>
+      <li class="nav-item" >
+        <a href="/user/articles" class="nav-link" [class.active]="router.url==='/user/articles'">
+          <span class="fa fa-th-large"></span>
+          <span i18n>My articles </span>
+        </a>
+      </li>
+      <li class="nav-item" >
+        <a href="/user/art" class="nav-link" [class.active]="router.url==='/user/arts'">
+          <span class="fa fa-th-large"></span>
+          <span i18n>my artworks</span>
+        </a>
+      </li>
+      <li class="nav-item" >
+        <a href="/user/bids" class="nav-link" [class.active]="router.url==='/user/bids'">
+          <span class="fa fa-th-large"></span>
+          <span i18n>my bids</span>
+        </a>
+      </li>
+
+      <li class="nav-item" >
+        <a href="/user/offer" class="nav-link" [class.active]="router.url==='/user/offer'">
+          <span class="fa fa-th-large"></span>
+          <span i18n>my offers</span>
+        </a>
+      </li>
+
+      <li class="nav-item" >
+        <a href="/user/orders" class="nav-link" [class.active]="router.url==='/user/orders'">
+          <span class="fa fa-th-large"></span>
+          <span i18n>my orders</span>
+        </a>
+      </li>
+    </ul>
+  </nav>

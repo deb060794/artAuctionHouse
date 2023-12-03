@@ -1,0 +1,32 @@
+.navbar-brand {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+.navbar-logo {
+    height:50px;
+    width: 70px; 
+    margin: 0;
+    padding: 0;
+}
+.search-btn {
+    border: 1px solid #D4AF37; 
+    background-color: #112546;
+    border-radius: 5px; 
+    padding: 5px; 
+    margin: 5px; 
+    color: #fff;  
+    border-top-left-radius: 0; 
+    border-bottom-left-radius: 0;
+    border-left: 1px solid #D4AF37; 
+}
+.input-group {
+    display: flex; 
+}
+
+.search-input {
+    border-right: none; 
+    border-top-right-radius: 0; 
+    border-bottom-right-radius: 0; 
+    border: 1px solid #D4AF37;
+}
+

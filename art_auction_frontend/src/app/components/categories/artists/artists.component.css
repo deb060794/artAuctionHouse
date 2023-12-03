@@ -1,0 +1,10 @@
+.transparent-btn {
+    background-color: #112546;
+    border: 1px solid gold;
+    
+  }
+  
+  .btn-group {
+    display: flex;
+    justify-content: center;
+  }

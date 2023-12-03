@@ -1,0 +1,59 @@
+<div class="art-detail-container">
+    <div class="d-flex flex-row justify-content-center align-items-center">
+
+        <div class="d-flex flex-column align-items-center mr-4">
+            <h2 class="bold">{{ art.title }}</h2>
+            
+            <div class="image-container mb-2">
+                <img [src]="art.imageUrl.replace('\\\\', '/')" class="d-block" alt="{{ art.title }}" style="height: 300px; width: 300px; object-fit: cover;">
+            </div>
+            
+            <p class="italic" i18n>{{ art.description }}</p>
+        </div>
+        <div class="d-flex flex-column align-items-start">
+           <div *ngIf="art.state == 'INAUCTION'">
+                <p class="bold" i18n>Current Price: <span id="currentPrice">{{ currentPrice | currency:'EUR':'symbol':'1.2-2' }}</span></p>
+                <label  for="bidAmount" class="bold d-block" i18n>Place your bid:</label><span class="italic" i18n>Minimum bid: More than {{ currentPrice | currency:'EUR':'symbol':'1.2-2' }}</span>
+                <div class="d-flex flex-row align-items-center">
+                    <input type="number" 
+                    id="bidAmount" 
+                    [(ngModel)]="bidAmount" 
+                    [min]="currentPrice" 
+                    placeholder="Enter your bid" 
+                    style="width: 150px; margin-right: 10px;">
+                    <button type="button" (click)="onBid(art.id)"style="background-color: #112546; border: 1px solid #D4AF37; color: #D4AF37;" i18n>Bid</button>
+                    
+
+                </div>
+                <button type="button" (click)="addToWishlist(art.id)"style="background-color: #112546; border: 1px solid #D4AF37; color: #D4AF37;" i18n>Add To Wishlist</button>
+                <p class="bold" i18n>Total Bids: <span id="totalBids">{{ numberOfBids }}</span></p>
+                <p class="bold" i18n>Time left: <span id="timer">{{ timeLeft }}</span></p>
+           </div>
+
+           <div *ngIf="art.state == 'PUBLISHED'">
+                <p class="bold" i18n >Starting price:<span>{{art.initialPrice | currency:'EUR':'symbol':'1.2-2' }}</span></p>
+                <label  for="offerAmount" class="bold d-block" i18n>Make an offer:</label>
+                <div class="d-flex flex-row align-items-center">
+                    <input type="number" 
+                    id="offerAmount" 
+                    [(ngModel)]="offerAmount" 
+                    placeholder="Enter your offer" 
+                    style="width: 150px; margin-right: 10px;">
+                    <button type="button" (click)="onOffer(art.id)"style="background-color: #112546; border: 1px solid #D4AF37; color: #D4AF37;" i18n>Make an offer</button>
+                    
+                </div>
+                <button type="button" (click)="addToWishlist(art.id)"style="background-color: #112546; border: 1px solid #D4AF37; color: #D4AF37;" i18n>Add To Wishlist</button>
+            </div>
+
+            <div *ngIf="art.state == 'BOUGHT'">
+               <h2>SOLD</h2>
+            </div>
+            
+            <div [ngClass]="{'text-success': messageSuccess, 'text-danger': !messageSuccess}" *ngIf="message" i18n>
+                {{ message }}
+            </div>
+            
+            
+        </div>
+    </div>
+</div>

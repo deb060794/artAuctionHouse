@@ -1,0 +1,11 @@
+<h2 mat-dialog-title i18n>Confirmation</h2>
+
+<mat-dialog-content class="mat-typography" i18n>
+  Are you sure to delete user ?
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close  i18n>Cancel</button>
+  <button mat-button color="warn" (click)="deleteUser()" i18n>I'm sure.</button>
+</mat-dialog-actions>
+

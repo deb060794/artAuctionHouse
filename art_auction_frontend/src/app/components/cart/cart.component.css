@@ -1,0 +1,19 @@
+.card {
+    max-width: 400px; /* Adjust the width as needed */
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 200px; /* Adjust the height as needed */
+    object-fit: cover;
+  }
+  
+  .card-title {
+    margin-top: 15px;
+  }
+
+  .total-amount-card {
+    margin-top: 20px;
+    background-color: #f8f9fa; /* Light gray background */
+    border: 1px solid #ddd; /* Light border */
+  }

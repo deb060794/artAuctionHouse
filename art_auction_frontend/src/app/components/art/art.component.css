@@ -1,0 +1,59 @@
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; 
+}
+
+.image-container img {
+  object-fit: cover;
+  height: 200px; 
+  width: 200px; 
+}
+
+.art-card-container {
+  margin: 1rem;
+  flex-basis: 200px;
+}
+
+.btn-custom {
+  background-color: #112546;
+  border-color: #FFD700; 
+  color: #fcf9f9; 
+  width: 100px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem; /* Adjust as needed */
+}
+
+.sidebar {
+  flex: 1;
+  /* More styles as needed */
+}
+
+.art-gallery {
+  flex: 3;
+  /* More styles as needed */
+}
+
+
+
+
+
+
+
+

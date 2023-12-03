@@ -1,0 +1,87 @@
+<app-admin-navigation></app-admin-navigation>
+<div class="container custom-container">
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      <strong i18n>Error!</strong> {{errorMessage}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="alert alert-success" *ngIf="infoMessage">
+      <strong i18n>Successful!</strong> {{infoMessage}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="dataSource">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col col-xs-6">
+                <h3 class="panel-title" i18n>All Artworks</h3>
+              </div>
+            </div>
+          </div>
+    
+          <div class="card-body">
+            <table mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Order Id</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="artwork">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>artwork</th>
+                <td mat-cell *matCellDef="let element">{{element.title}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="buyer">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>buyer</th>
+                <td mat-cell *matCellDef="let element">{{element.initialPrice}}</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="seller">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>seller</th>
+                <td mat-cell *matCellDef="let element">{{element.state}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>price</th>
+                <td mat-cell *matCellDef="let element">{{element.state}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>state</th>
+                <td mat-cell *matCellDef="let element">{{element.state}}</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Actions</th>
+                <td mat-cell *matCellDef="let element" style="width:140px;">
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon> 
+                  </button>
+              
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="editOrderRequest(element)">
+                      <mat-icon>edit</mat-icon>
+                      <span i18n>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteOrderRequest(element)">
+                      <mat-icon>delete</mat-icon>
+                      <span i18n>Delete</span>
+                    </button>
+                      
+                  </mat-menu>
+                </td>
+              </ng-container>
+              
+            
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 20,30,40, 50]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>

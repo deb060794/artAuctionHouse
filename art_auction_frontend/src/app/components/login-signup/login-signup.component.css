@@ -1,0 +1,82 @@
+
+.container {
+  background-color: #112546;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.card-container {
+  background: #eceef0;
+  padding: 40px;
+  height: 60vh;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Increase width to 70% of the container */
+  max-width: 600px; /* Setting a max width for larger screens */
+}
+
+.section-label {
+  margin-bottom: 20px;
+  color: #112546;
+  text-align: center;
+  font-size: 24px; /* Making the Login label bigger */
+}
+
+.form-control {
+  margin-bottom: 20px;
+  padding: 12px;
+  font-size: 16px; /* Increasing font size */
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #112546;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 12px 20px;
+  font-size: 16px; /* Increasing font size */
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0a1d36;
+  
+}
+
+.other-options {
+  margin-top: 20px;
+ 
+}
+
+.nav-link {
+  color: white;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  font-size: 16px; /* Increasing font size */
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px; /* Increasing font size */
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  margin-top: 20px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  margin-top: 20px;
+}
+
+

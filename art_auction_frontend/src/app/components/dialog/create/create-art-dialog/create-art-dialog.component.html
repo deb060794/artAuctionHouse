@@ -1,0 +1,70 @@
+<h2 mat-dialog-title i18n>Add new art</h2>
+
+<div mat-dialog-content>
+  <form [formGroup]="formArt">
+
+    <mat-form-field>
+      <mat-label i18n>Art name</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label i18n>Art Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+      <mat-label i18n>Image URL</mat-label>
+      <input matInput formControlName="image">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label i18n>Art Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label i18n>Starting Price</mat-label>
+      <input matInput formControlName="initialPrice" type="number">
+    </mat-form-field>
+
+    <div formGroupName="artist">
+      <mat-form-field>
+        <mat-label i18n>Artist Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label i18n>Artist Image URL</mat-label>
+        <input matInput formControlName="imageUrl">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label i18n>Artist Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label i18n>Artist Country</mat-label>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </form>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="createArt()" [disabled]="!formArt.valid" i18n>Create</button>
+  <button mat-button (click)="dialogRef.close()" i18n>Cancel</button>
+</div>
+
