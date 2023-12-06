@@ -1,1 +1,41 @@
-<p>recent-bids works!</p>
+<app-user-navigation></app-user-navigation>
+<div class="container">
+    <h2 class="text-center mt-3">My recent bids</h2>
+    <div *ngIf="bids && bids.length > 0; else noBidsTemplate">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12" *ngFor="let bid of bids">
+                <div class="card mb-4 shadow-sm">
+                    <img [src]="bid.art.imageUrl.replace('\\\\', '/')" class="card-img-top" alt="{{ bid.art.title }}" (click)="placeBid(bid.art.id)" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ bid.art.title }}</h5>
+                        <!-- Conditional Message -->
+                        <p *ngIf="bid.isHighestBidder" class="text-success">You are the highest bidder!</p>
+                        <p *ngIf="!bid.isHighestBidder" class="text-danger">Your bid has been surpassed.</p>
+                        
+                        <p class="card-text">
+                            Bidding Price: 
+                            <strong>{{ bid.amount | currency:'EUR':'symbol':'1.2-2' }}</strong>
+                        </p>
+                        <div class="card-text">
+                            Time Remaining:
+                            <strong>{{ bid.remainingTime }}</strong>
+                          </div>
+                          <ng-container *ngIf="bid.isAuctionEnded && bid.isHighestBidder; else bidAgain">
+                            <button type="button" class="btn btn-primary" (click)="addToCart(bid.art.id, bid.amount)">Add to cart</button>
+                          </ng-container>
+                         
+                          
+                          <ng-template #bidAgain>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="placeBid(bid.art.id)">Bid Again</button>
+                          </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noBidsTemplate>
+        <p class="text-center">No bids placed yet.</p>
+    </ng-template>
+</div>
+
+
