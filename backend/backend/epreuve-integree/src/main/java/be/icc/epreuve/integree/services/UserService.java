@@ -66,8 +66,8 @@ public class UserService {
     }
 
 
-
-
-
-
+    public Optional<User> getByUsername(String username) {
+       Optional<User> user = repository.findByUsername(username);
+        return user;
+    }
 }

@@ -181,7 +181,7 @@ class UserController {
         if (!user.isPresent()){
             return new ResponseEntity<>(new MessageResponse("user not found"),HttpStatus.NOT_FOUND);
         }
-        List<Offer> offers = user.get().getOffers();
+        List<Offer> offers = user.get().getOffersMade();
 
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }

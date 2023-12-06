@@ -21,8 +21,9 @@
                             <strong>{{ bid.remainingTime }}</strong>
                           </div>
                           <ng-container *ngIf="bid.isAuctionEnded && bid.isHighestBidder; else bidAgain">
-                            <button type="button" class="btn btn-primary" (click)="addToCart(bid.art.id, bid.amount)">Buy</button>
+                            <button type="button" class="btn btn-primary" (click)="addToCart(bid.art.id, bid.amount)">Add to cart</button>
                           </ng-container>
+                         
                           
                           <ng-template #bidAgain>
                             <button type="button" class="btn btn-sm btn-outline-secondary" (click)="placeBid(bid.art.id)">Bid Again</button>

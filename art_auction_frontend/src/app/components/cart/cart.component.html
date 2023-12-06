@@ -1,27 +1,29 @@
 <div *ngIf="cart && cart.length > 0; else emptyCart" class="container">
-  <div class="d-flex flex-column align-items-center">
-    <!-- Cards for Art Items -->
-    <div *ngFor="let art of cart" class="card mb-4 shadow-sm w-50">
-      <h2 class="card-title text-center">{{ art.art.title }}</h2>
-      <img [src]="art.art.imageUrl.replace('\\\\', '/')" class="card-img-top" alt="{{ art.art.title }}" style="height: 200px; object-fit: cover;">
-      <div class="card-body">
-        <p class="card-text">Description: {{ art.art.description }}</p>
-        <p class="card-text">
-         Price: 
-          <strong>{{ art.price | currency:'EUR':'symbol':'1.2-2' }}</strong>
-        </p>
+  <div class="row">
+    <!-- Column for Art Items -->
+    <div class="col-md-6 art-items">
+      <div *ngFor="let art of cart" class="card mb-4 shadow-sm">
+        <h2 class="card-title text-center">{{ art.art.title }}</h2>
+        <img [src]="art.art.imageUrl.replace('\\\\', '/')" class="card-img-top" alt="{{ art.art.title }}" style="height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <p class="card-text">Description: {{ art.art.description }}</p>
+          <p class="card-text">Price: <strong>{{ art.price | currency:'EUR':'symbol':'1.2-2' }}</strong></p>
+        </div>
       </div>
     </div>
 
-    <!-- Total Amount -->
-    <div class="total-amount w-50">
-      <h2>Total Amount:{{ totalAmount | currency:'EUR':'symbol':'1.2-2' }}</h2>
+    <!-- Column for Total Amount and Checkout Button -->
+    <div class="col-md-6 checkout-section">
+      <div class="total-amount">
+        <h2>Total Amount:{{ totalAmount | currency:'EUR':'symbol':'1.2-2' }}</h2>
+      </div>
+      <button class="btn btn-primary mt-3" (click)="checkout()" i18n>Checkout</button>
     </div>
-    <button class="btn btn-primary mt-3" (click)="checkout()" i18n>Checkout</button>
   </div>
 </div>
 
 <ng-template #emptyCart>
   <p class="text-center">Your cart is empty.</p>
 </ng-template>
+
 

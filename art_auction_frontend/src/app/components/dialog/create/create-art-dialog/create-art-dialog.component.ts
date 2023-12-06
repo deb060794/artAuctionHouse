@@ -10,6 +10,9 @@ import { ArtService } from 'src/app/_services/art.service';
 
 import { StorageService } from 'src/app/_services/storage.service';
 import { AuctionState } from 'src/app/_model/auctionState';
+import { User } from 'src/app/_model/user';
+import { Role } from 'src/app/_model/role';
+
 
 
 @Component({
@@ -22,6 +25,8 @@ export class CreateArtDialogComponent {
   errorMessage: string | undefined;
   countries = Object.values(Country);
   categories = Object.values(Category);
+  showAdminBoard = false;
+  private roles: string[] = [];
   
   
   constructor(
@@ -29,6 +34,7 @@ export class CreateArtDialogComponent {
     public dialogRef: MatDialogRef<CreateArtDialogComponent>,
     private artService: ArtService,
     private storageService: StorageService ) {
+      
       this.formArt = this.fb.group({
         title: ['', Validators.required],
         description: ['', Validators.required],

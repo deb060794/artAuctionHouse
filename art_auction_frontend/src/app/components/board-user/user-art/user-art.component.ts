@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class UserArtComponent {
   artList: Array<Art> = [];
   dataSource: MatTableDataSource<Art> = new MatTableDataSource();
-  displayedColumns: string[] = ['id', 'title','artist', 'price', 'state', 'action'];
+  displayedColumns: string[] = ['id', 'title','artist', 'price', 'state'];
   selectedArt: Art = new Art();
   errorMessage!: string;
   infoMessage!: string;

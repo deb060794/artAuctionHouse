@@ -1,3 +1,14 @@
-<h2 i18n>Payment Initiated!</h2>
-<p i18n>Click the button below to confirm your order.</p>
-<button (click)="confirmOrder()"i18n>Confirm Order</button>
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title i18n>Payment Initiated!</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p i18n>Click the button below to confirm your order.</p>
+      </mat-card-content>
+      <mat-card-actions class="action-buttons">
+        <button mat-raised-button color="primary" (click)="confirmOrder()" i18n>Confirm Order</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

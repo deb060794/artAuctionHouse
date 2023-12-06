@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ArtService } from 'src/app/_services/art.service';
 import { ArtCategoryService } from 'src/app/_services/art-category-service';
 import { Router } from '@angular/router';
+import { Art } from 'src/app/_model/art';
+import { Country } from 'src/app/_model/country';
+import { Category } from 'src/app/_model/category';
+import { Artist } from 'src/app/_model/artist';
 
 
 
@@ -14,13 +18,23 @@ import { Router } from '@angular/router';
 export class ArtComponent implements OnInit{
   arts:any;
   categories:any;
-  itemsPerPageOptions: number[] = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
+  itemsPerPageOptions: number[] = [4, 8, 12, 16, 20];
   itemsPerPage: number = this.itemsPerPageOptions[1];
   currentPage: number = 1; 
   totalItems: number = 0; 
-  maxSize: number = 5;
+  maxSize: number = 4;
   pagedArts: any[] = [];
-  selectedCategory = '';
+  filteredArts: Art[] | undefined;
+
+  // Filter criteria
+  selectedCategory: number | undefined;
+  selectedArtist: number | undefined;
+  selectedCountry: string | undefined;
+  minPrice: number | undefined;
+  maxPrice: number | undefined;
+ 
+  artists: Artist[] = [];   
+  countries:Country[] = [];  
 
   
   
@@ -34,12 +48,14 @@ export class ArtComponent implements OnInit{
     this.artService.getAllArtWorks().subscribe(
       data => {
         this.arts = data;
+        this.filteredArts = this.arts;
         this.totalItems = this.arts.length;
       },
       err => {
         this.arts = JSON.parse(err.error).message;
       }
     );
+ 
 
     this.artCategoryService.getAllCategories().subscribe(
       data => {
@@ -103,6 +119,16 @@ export class ArtComponent implements OnInit{
 
   navigateToArt(id: number) { 
     this.router.navigate(['/bid'], { queryParams: { id: id } });
+  }
+
+  applyFilters() {
+    this.filteredArts = this.arts.filter((art: { categoryId: number; artistId: number; artistCountry: string; initialPrice: number; }) => {
+      return (!this.selectedCategory || art.categoryId === this.selectedCategory) &&
+             (!this.selectedArtist || art.artistId === this.selectedArtist) &&
+             (!this.selectedCountry || art.artistCountry === this.selectedCountry) &&
+             (!this.minPrice || art.initialPrice >= this.minPrice) &&
+             (!this.maxPrice || art.initialPrice <= this.maxPrice);
+    });
   }
 
   addToWishlist(artId: number) {

@@ -40,7 +40,7 @@ export class UserBidsComponent implements OnInit {
     interval(1000)
       .pipe(takeWhile(() => this.bids.length > 0))
       .subscribe(() => {
-        console.log(this.bids);
+       
         this.bids.forEach(bid => {
           bid.remainingTime = this.getRemainingTime(bid.art.lot.endDate);
           bid.isAuctionEnded = this.checkIfAuctionEnded(bid.art.lot.endDate);

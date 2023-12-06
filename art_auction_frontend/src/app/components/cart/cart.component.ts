@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Art } from 'src/app/_model/art';
 import { CartService } from 'src/app/_services/cart.service';
+import { StorageService } from 'src/app/_services/storage.service';
 import { StripeService } from 'src/app/_services/stripe.service';
 
 interface CartItem {
@@ -20,7 +21,7 @@ export class CartComponent implements OnInit {
   totalAmount: number = 0;
  
 
-  constructor(private stripeService: StripeService, private cartService: CartService) {}
+  constructor(private stripeService: StripeService, private cartService: CartService, private storageService : StorageService) {}
 
 
   ngOnInit(): void {
@@ -34,23 +35,30 @@ export class CartComponent implements OnInit {
   }
 
   
-
   checkout() {
-    
     const stripe = this.stripeService.getStripe();
-
+  
     fetch('http://localhost:8080/api/stripe/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ artIds: this.artIds})
+      body: JSON.stringify({ artIds: this.artIds })
     })
-   
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(session => {
-      console.log(session.id);
-      return stripe.redirectToCheckout({ sessionId: session.id });
+     
+      if (session && session.id) {
+        this.storageService.saveSessionCart(session.id);
+        return stripe.redirectToCheckout({ sessionId: session.id });
+      } else {
+        throw new Error('Session ID not found');
+      }
     })
     .then(result => {
       if (result.error) {
@@ -59,8 +67,9 @@ export class CartComponent implements OnInit {
     })
     .catch(error => {
       console.error('Error:', error);
+      alert('Error: ' + error.message);
     });
   }
+  
+
 }
-
-

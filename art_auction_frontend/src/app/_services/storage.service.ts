@@ -6,6 +6,7 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class StorageService {
+
   constructor() {}
 
   clean(): void {
@@ -38,7 +39,27 @@ export class StorageService {
   public saveCart(cart: any): void {  
     window.sessionStorage.setItem('cart', JSON.stringify(cart));
   }
+  clearSessionCart() {
+    window.sessionStorage.removeItem('sessionCart'); 
+  }
 
+  
+  clearCart() {
+     window.sessionStorage.removeItem('cart'); 
+  }
+
+  public saveSessionCart(session: any): void {  
+    window.sessionStorage.setItem('sessionCart', JSON.stringify(session));
+  }
+
+  public getSessionCart(): any {
+    const session = window.sessionStorage.getItem('sessionCart');
+    if (session) {
+      return JSON.parse(session);
+    }
+
+    return null;
+  }
   public getCart(): any {
     const cart = window.sessionStorage.getItem('cart');
     if (cart) {

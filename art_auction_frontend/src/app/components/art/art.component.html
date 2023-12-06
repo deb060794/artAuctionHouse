@@ -1,4 +1,4 @@
-<h1 style="text-align:center"i18n>All Artworks</h1>
+
 
 
 <div class="d-flex justify-content-between align-items-center">
@@ -11,6 +11,43 @@
 
   <pagination-controls (pageChange)="setCurrentPage($event)" [maxSize]="maxSize"></pagination-controls>
 </div>
+
+<div class="main-container">
+
+
+  <div class="filter-section">
+  
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="selectedCategory">
+      <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Artist Filter -->
+  <mat-form-field>
+    <mat-label>Artist</mat-label>
+    <mat-select [(ngModel)]="selectedArtist">
+      <mat-option *ngFor="let artist of artists" [value]="artist.id">{{ artist.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Country Filter -->
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+    <mat-select [(ngModel)]="selectedCountry">
+      <mat-option *ngFor="let country of countries" [value]="country">{{ country }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Price Range Filter -->
+  <div>
+    <input type="number" [(ngModel)]="minPrice" placeholder="Min Price">
+    <input type="number" [(ngModel)]="maxPrice" placeholder="Max Price">
+  </div>
+
+  <button (click)="applyFilters()">Apply Filters</button>
+  </div>
 
 <div class="art-gallery flex-container">
   <div *ngFor="let art of arts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }" class="art-card-container">
@@ -32,7 +69,7 @@
         <button *ngIf="art.state == 'INAUCTION'" class="btn btn-custom" (click)="placeBid(art)" i18n>Bid</button>
         <button *ngIf="art.state =='PUBLISHED'" class="btn btn-custom" (click)="makeOffer(art)" i18n>Make an offer</button>
       </div>
-      
+    </div>
     </div>
   </div>
 </div>

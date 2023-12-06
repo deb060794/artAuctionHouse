@@ -70,7 +70,7 @@ public class StripeController {
             SessionCreateParams params = SessionCreateParams.builder()
                     .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                     .setMode(SessionCreateParams.Mode.PAYMENT)
-                    .setSuccessUrl("http://localhost:4200/payment-confirm")
+                    .setSuccessUrl("http://localhost:4200/payment-confirm/" )
                     .setCancelUrl("http://localhost:4200/cancel")
                     .addLineItem(
                             SessionCreateParams.LineItem.builder()
@@ -91,7 +91,7 @@ public class StripeController {
 
             Session session = Session.create(params);
 
-            response.put("session_id", session.getId());
+            response.put("id", session.getId());
             return ResponseEntity.ok(response);
         } catch (StripeException e) {
             e.printStackTrace();
@@ -101,50 +101,61 @@ public class StripeController {
 
     }
 
-    @PostMapping("/confirm-order")
-    public ResponseEntity<?> confirmOrder(@RequestBody Map<String, String> payload) {
-        String sessionId = payload.get("sessionId");
-        System.out.println("Session ID: " + sessionId);
-        Session session;
-        List<Art> artWorks;
-        BigDecimal totalPrice;
-        try {
-            session = Session.retrieve(sessionId);
-            Map<String, String> metadata = session.getMetadata();
 
-            // Extract information from metadata
-            List<Long> artIds = Arrays.stream(metadata.get("artIds").split(","))
-                    .map(Long::valueOf)
-                    .collect(Collectors.toList());
-            artWorks = artService.getAllById(artIds);
-            totalPrice = new BigDecimal(metadata.get("totalPrice"));
-        } catch (StripeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving session");
-        }
+        @PostMapping("/confirm-order")
+        public ResponseEntity<?> confirmOrder(@RequestBody Map<String, String> payload) {
+            Map<String, Object> response = new HashMap<>();
+            String sessionId = payload.get("sessionId");
+            String userName = payload.get("user");
 
+            Session session;
+            List<Art> artWorks;
+            BigDecimal totalPrice;
+            try {
+                session = Session.retrieve(sessionId);
+
+                Map<String, String> metadata = session.getMetadata();
+
+                // Extract information from metadata
+                List<Long> artIds = Arrays.stream(metadata.get("artIds").split(","))
+                        .map(Long::valueOf)
+                        .collect(Collectors.toList());
+                artWorks = artService.getAllById(artIds);
+                totalPrice = new BigDecimal(metadata.get("totalPrice"));
+            } catch (StripeException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving session");
+            }
         // Check payment status
-        if ("succeeded".equals(session.getPaymentStatus())) {
+        if ("paid".equals(session.getPaymentStatus())) {
             Order order = new Order();
             for (Art a:artWorks) {
                 a.setState(AuctionState.BOUGHT);
                 order.setArt(a);
             }
             order.setTotalPrice(totalPrice);
+            System.out.println("userName"+userName);
 
-            User userDetails = authService.getCurrentUser().get();
-            order.setBuyer(userService.findByUsername(userDetails.getUsername()));
+            order.setBuyer(userService.findByUsername(userName));
 
             order.setState(OrderState.PAID);
 
             order.setQuantity(artWorks.size());
 
             orderRepository.save(order);
-            return ResponseEntity.ok().body("Order created successfully");
+
+            response.put("success", true);
+            response.put("message", "Order created successfully");
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment not successful");
+            response.put("success", false);
+            response.put("message", "Payment not successful");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-    }
+        }
+
+
+ }
 
 
 
-}
+

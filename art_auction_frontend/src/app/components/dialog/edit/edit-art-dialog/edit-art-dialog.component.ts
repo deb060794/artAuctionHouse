@@ -23,12 +23,14 @@ export class EditArtDialogComponent {
   countries = Object.values(Country);
   categories = Object.values(Category); 
   states = Object.values(AuctionState);
+  
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditArtDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private adminService: AdminService) {
+    
       this.formArt = this.fb.group({
         title: [data.art.title, Validators.required],
         description: [data.art.description, Validators.required],

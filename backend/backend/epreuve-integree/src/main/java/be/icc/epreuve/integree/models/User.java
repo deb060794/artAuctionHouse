@@ -81,7 +81,10 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "offer",cascade = CascadeType.ALL)
-    private List<Offer> offers;
+    private List<Offer> offersMade;
+    @JsonIgnore
+    @OneToMany(mappedBy = "offer",cascade = CascadeType.ALL)
+    private List<Offer> offersReceived;
     @JsonIgnore
     @OneToMany(mappedBy = "writer",cascade = CascadeType.ALL)
     private List<ArticleComment> articleComments;

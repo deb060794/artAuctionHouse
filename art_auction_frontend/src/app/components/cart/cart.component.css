@@ -1,5 +1,7 @@
 .card {
     max-width: 400px; /* Adjust the width as needed */
+    width: 100%; /* Adjust as needed */
+    display: flex;
   }
   
   .card-img-top {
@@ -11,7 +13,34 @@
   .card-title {
     margin-top: 15px;
   }
-
+  .container {
+    padding: 20px;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .art-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+ 
+  
+  .checkout-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .total-amount {
+    margin-bottom: 20px;
+  }
+  
   .total-amount-card {
     margin-top: 20px;
     background-color: #f8f9fa; /* Light gray background */

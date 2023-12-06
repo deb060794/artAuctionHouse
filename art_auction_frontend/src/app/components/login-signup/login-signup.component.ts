@@ -37,31 +37,26 @@ export class LoginSignupComponent{
     this.authService.login(username, password).subscribe({
       next: data => {
         this.storageService.saveUser(data);
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-       
         if (this.isLoggedIn) { 
           this.authService.setLoggedIn(true); 
-        }
-        setTimeout(() => {
-          this.router.navigate(['/home']); // Redirect to home after a small delay
-        }, 2000);  // 2 seconds delay for example
+        } 
+        }, 
       
       
-      },
+      
       error: err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
     });
+    this.router.navigate(['/home']); 
     
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
+ 
 }
 
 

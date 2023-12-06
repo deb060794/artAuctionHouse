@@ -80,7 +80,7 @@ public class WebSecurityConfig {
                   .requestMatchers("/api/stripe/**").permitAll()
                   .requestMatchers("/api/makeOffer").authenticated()
                   .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                  .requestMatchers("/api/user/**").hasRole("ADMIN")
+                  .requestMatchers("/api/user/**").permitAll()
                   .requestMatchers("/api/**").permitAll()
                   .anyRequest().authenticated()
         ).exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))

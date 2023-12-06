@@ -13,7 +13,12 @@ const httpOptions = {
 })
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
-  loggedIn$ = this.loggedIn.asObservable();
+  
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable(); 
+  }
+
   
   constructor(private http: HttpClient) {}
 
@@ -26,6 +31,7 @@ export class AuthService {
       },
       httpOptions
     );
+    
   }
 
   register(username: string, email: string, password: string, adress: string, firstname: string, lastname: string): Observable<any> {
