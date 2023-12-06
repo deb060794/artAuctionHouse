@@ -183,7 +183,7 @@ class UserController {
                 .map(Art::getId)
                 .collect(Collectors.toSet());
 
-        
+
         List<Bid> filteredBids = bids.stream()
                 .filter(bid -> !orderedArtIds.contains(bid.getArt().getId()))
                 .collect(Collectors.toList());
