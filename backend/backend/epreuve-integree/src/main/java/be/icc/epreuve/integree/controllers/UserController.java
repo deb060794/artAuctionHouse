@@ -162,9 +162,21 @@ class UserController {
             return new ResponseEntity<>(new MessageResponse("user not found"),HttpStatus.NOT_FOUND);
         }
         List<Bid> bids = user.get().getBids();
+        List<Order> orders = user.get().getOrders();
+
+
+        Set<Long> orderedArtIds = orders.stream()
+                .map(Order::getArt)
+                .map(Art::getId)
+                .collect(Collectors.toSet());
+
+
+        List<Bid> filteredBids = bids.stream()
+                .filter(bid -> !orderedArtIds.contains(bid.getArt().getId()))
+                .collect(Collectors.toList());
         LocalDate currentDate = LocalDate.now();
 
-        List<Bid> recentBids = bids.stream()
+        List<Bid> recentBids = filteredBids.stream()
                 .filter(bid -> {
                     LocalDate creationDate = convertToLocalDate(bid.getBidDate());
                     return creationDate != null &&
