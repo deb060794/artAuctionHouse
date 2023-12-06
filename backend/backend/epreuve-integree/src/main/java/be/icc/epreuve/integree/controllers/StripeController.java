@@ -131,17 +131,20 @@ public class StripeController {
             for (Art a:artWorks) {
                 a.setState(AuctionState.BOUGHT);
                 order.setArt(a);
+                order.setTotalPrice(totalPrice);
+                System.out.println("userName"+userName);
+
+                order.setBuyer(userService.findByUsername(userName));
+
+                order.setState(OrderState.PAID);
+
+                order.setQuantity(artWorks.size());
+
+                orderRepository.save(order);
+                a.setOrder(order);
+                artService.insert(a);
             }
-            order.setTotalPrice(totalPrice);
-            System.out.println("userName"+userName);
 
-            order.setBuyer(userService.findByUsername(userName));
-
-            order.setState(OrderState.PAID);
-
-            order.setQuantity(artWorks.size());
-
-            orderRepository.save(order);
 
             response.put("success", true);
             response.put("message", "Order created successfully");

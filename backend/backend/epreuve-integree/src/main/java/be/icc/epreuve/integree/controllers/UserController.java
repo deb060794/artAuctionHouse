@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/")
@@ -165,14 +167,28 @@ class UserController {
     }
 
     @GetMapping("user/bids/{id}")
-    public ResponseEntity<?> myBids(@PathVariable Long id){
-        Optional<User> user = userService.get(id);
-        if (!user.isPresent()){
-            return new ResponseEntity<>(new MessageResponse("user not found"),HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> myBids(@PathVariable Long id) {
+        Optional<User> userOptional = userService.get(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>(new MessageResponse("User not found"), HttpStatus.NOT_FOUND);
         }
-        List<Bid> bids = user.get().getBids();
 
-        return new ResponseEntity<>(bids, HttpStatus.OK);
+        User user = userOptional.get();
+        List<Bid> bids = user.getBids();
+        List<Order> orders = user.getOrders();
+
+
+        Set<Long> orderedArtIds = orders.stream()
+                .map(Order::getArt)
+                .map(Art::getId)
+                .collect(Collectors.toSet());
+
+        
+        List<Bid> filteredBids = bids.stream()
+                .filter(bid -> !orderedArtIds.contains(bid.getArt().getId()))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(filteredBids, HttpStatus.OK);
     }
 
     @GetMapping("user/offers/{id}")
