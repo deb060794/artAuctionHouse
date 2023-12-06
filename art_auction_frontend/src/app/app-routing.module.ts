@@ -35,6 +35,10 @@ import { UserPurchasesComponent } from './components/board-user/user-purchases/u
 import { UserArticlesComponent } from './components/board-user/user-articles/user-articles.component';
 import { UserArtComponent } from './components/board-user/user-art/user-art.component';
 import { UserOfferComponent } from './components/board-user/user-offer/user-offer.component';
+import { RecentArtComponent } from './components/board-user/recent-art/recent-art.component';
+import { RecentBidsComponent } from './components/board-user/recent-bids/recent-bids.component';
+import { RecentOrdersComponent } from './components/board-user/recent-orders/recent-orders.component';
+import { OffersReceivedComponent } from './components/board-user/offers-received/offers-received.component';
 
 
 
@@ -77,6 +81,10 @@ const routes: Routes = [
   { path: 'user/articles', component: UserArticlesComponent},
   { path: 'user/art', component: UserArtComponent},
   { path: 'user/offer', component: UserOfferComponent},
+  { path: 'user/recent-arts', component: RecentArtComponent},
+  { path: 'user/recent-bids', component: RecentBidsComponent},
+  { path: 'user/recent-orders', component: RecentOrdersComponent},
+  { path: 'user/offers-received', component: OffersReceivedComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
