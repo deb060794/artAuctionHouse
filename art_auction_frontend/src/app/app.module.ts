@@ -80,6 +80,10 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { ResultsComponent } from './components/results/results.component';
 import { CreateLotDialogComponent } from './components/dialog/create-lot-dialog/create-lot-dialog.component';
 import { UserOfferComponent } from './components/board-user/user-offer/user-offer.component';
+import { RecentArtComponent } from './components/board-user/recent-art/recent-art.component';
+import { RecentBidsComponent } from './components/board-user/recent-bids/recent-bids.component';
+import { RecentOrdersComponent } from './components/board-user/recent-orders/recent-orders.component';
+import { OffersReceivedComponent } from './components/board-user/offers-received/offers-received.component';
 
 
 
@@ -139,6 +143,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResultsComponent,
     CreateLotDialogComponent,
     UserOfferComponent,
+    RecentArtComponent,
+    RecentBidsComponent,
+    RecentOrdersComponent,
+    OffersReceivedComponent,
   
     
   ],

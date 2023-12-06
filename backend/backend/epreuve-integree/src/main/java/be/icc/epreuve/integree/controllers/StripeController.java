@@ -142,7 +142,7 @@ public class StripeController {
 
                 orderRepository.save(order);
                 a.setOrder(order);
-                artService.insert(a);
+                artService.update(a);
             }
 
 

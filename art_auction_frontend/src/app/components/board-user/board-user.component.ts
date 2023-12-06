@@ -20,6 +20,7 @@ export class BoardUserComponent implements OnInit {
   orderCount:any = "";
   articleCount:any = "";
   bidCount2:any = "";
+  offerCount:any = ""; 
  
 
   constructor(private userService: UserService, 
@@ -32,31 +33,38 @@ export class BoardUserComponent implements OnInit {
 
 
   ngOnInit() {
-    this.numberOfArts(this.currentUser.id!);
-    this.numberOfBids(this.currentUser.id!);
-    this.numberOfOrders(this.currentUser.id!);
+    this.recentArts(this.currentUser.id!);
+    this.recentBids(this.currentUser.id!);
+    this.recentOrders(this.currentUser.id!);
+    this.offersReceived(this.currentUser.id!);
     
     
+  }
+  offersReceived(id: number) {
+    this.userService.offersReceived(id).subscribe(data => {
+      this.offerCount = data.length;
+    });
   }
 
   
 
-  numberOfArts(id:number){
-    this.userService.numberOfarts(id).subscribe(data => {
-      this.artCount = data.response;
+  recentArts(id:number){
+    this.userService.recentArts(id).subscribe(data => {
+     
+      this.artCount= data.length;
       
     });
   }
 
-  numberOfBids(id : number){
-    this.userService.numberOfBids(id).subscribe(data => {
-      this.bidCount = data.response;
+  recentBids(id : number){
+    this.userService.recentBids(id).subscribe(data => {
+      this.bidCount = data.length;
     });
   }
 
-  numberOfOrders(id:number){
-    this.userService.numberOfOrders(id).subscribe(data => {
-      this.orderCount = data.response;
+  recentOrders(id:number){
+    this.userService.recentOrders(id).subscribe(data => {
+      this.orderCount = data.length;
     })
   }
 }

@@ -16,6 +16,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class UserService {
+ 
   
   
   constructor(private http: HttpClient) {}
@@ -36,13 +37,13 @@ export class UserService {
     return this.http.post(API_URL+"/"+userId+"/"+"/unsubscribe", {});
   }
 
-  numberOfOrders(id: number): Observable<any>  {
+  recentOrders(id: number): Observable<any>  {
     return this.http.get(API_URL +"/myOrders/"+id);
   }
-  numberOfBids(id: number): Observable<any>  {
+  recentBids(id: number): Observable<any>  {
     return this.http.get(API_URL +"/myBids/"+id);
   }
-  numberOfarts(id: number): Observable<any>  {
+  recentArts(id: number): Observable<any>  {
     return this.http.get(API_URL +"/myArts/"+id);
   }
 
@@ -62,7 +63,9 @@ export class UserService {
     return this.http.get(API_URL +"/orders/"+id);
   }
 
-
+  offersReceived(id: any): Observable<any> {
+    return this.http.get(API_URL +"/offersReceived/"+id);
+  }
 
   
   

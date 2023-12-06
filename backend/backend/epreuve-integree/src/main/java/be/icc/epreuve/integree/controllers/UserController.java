@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -128,42 +133,74 @@ class UserController {
     }
 
     @GetMapping("user/myOrders/{id}")
-    public ResponseEntity<?> myNumberOfOrders(@PathVariable Long id){
-        Optional<User> user = userService.get(id);
-        if (!user.isPresent()){
-            return new ResponseEntity<>(new MessageResponse("user not found"),HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> recentOrders(@PathVariable Long id) {
+        Optional<User> userOptional = userService.get(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>(new MessageResponse("User not found"), HttpStatus.NOT_FOUND);
         }
-        List<Order> orders = user.get().getOrders();
-        int number = orders.size();
-        StringResponse response = new StringResponse();
-        response.setResponse(String.valueOf(number));
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
 
+        User user = userOptional.get();
+        List<Order> orders = user.getOrders();
+
+
+        LocalDate currentDate = LocalDate.now();
+
+        // Filter orders to include only those made within the last month
+        List<Order> recentOrders = orders.stream()
+                .filter(order -> order.getOrderDate() != null &&
+                        ChronoUnit.DAYS.between(order.getOrderDate().toLocalDate(), currentDate) <= 30)
+                .collect(Collectors.toList());
+
+
+
+        return new ResponseEntity<>(recentOrders, HttpStatus.OK);
+    }
     @GetMapping("user/myBids/{id}")
-    public ResponseEntity<?> myNumberOfBids(@PathVariable Long id){
+    public ResponseEntity<?> recentBids(@PathVariable Long id){
         Optional<User> user = userService.get(id);
         if (!user.isPresent()){
             return new ResponseEntity<>(new MessageResponse("user not found"),HttpStatus.NOT_FOUND);
         }
         List<Bid> bids = user.get().getBids();
-        int number = bids.size();
-        StringResponse response = new StringResponse();
-        response.setResponse(String.valueOf(number));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        LocalDate currentDate = LocalDate.now();
+
+        List<Bid> recentBids = bids.stream()
+                .filter(bid -> {
+                    LocalDate creationDate = convertToLocalDate(bid.getBidDate());
+                    return creationDate != null &&
+                            ChronoUnit.DAYS.between(creationDate, currentDate) <= 30;
+                })
+                .collect(Collectors.toList());
+
+
+        return new ResponseEntity<>(recentBids, HttpStatus.OK);
     }
 
     @GetMapping("user/myArts/{id}")
-    public ResponseEntity<?> myNumberOfArts(@PathVariable Long id){
+    public ResponseEntity<?> recentArts(@PathVariable Long id){
         Optional<User> user = userService.get(id);
         if (!user.isPresent()){
             return new ResponseEntity<>(new MessageResponse("user not found"),HttpStatus.NOT_FOUND);
         }
         List<Art> arts = user.get().getSoldArts();
-        int number = arts.size();
-        StringResponse response = new StringResponse();
-        response.setResponse(String.valueOf(number));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        LocalDate currentDate = LocalDate.now();
+
+        List<Art> recentArts = arts.stream()
+                .filter(art -> {
+                    LocalDate creationDate = convertToLocalDate(art.getCreationDate());
+                    return creationDate != null &&
+                            ChronoUnit.DAYS.between(creationDate, currentDate) <= 30;
+                })
+                .collect(Collectors.toList());
+
+
+        return new ResponseEntity<>(recentArts, HttpStatus.OK);
+    }
+
+    private LocalDate convertToLocalDate(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 
     @GetMapping("user/bids/{id}")
@@ -236,6 +273,21 @@ class UserController {
         StringResponse response = new StringResponse();
         response.setResponse(String.valueOf(number));
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("user/offersReceived/{id}")
+    public ResponseEntity<?> myReceivedOffers(@PathVariable Long id) {
+        Optional<User> userOptional = userService.get(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>(new MessageResponse("User not found"), HttpStatus.NOT_FOUND);
+        }
+
+        User user = userOptional.get();
+        List<Offer> offers= user.getOffersReceived();
+
+
+        return new ResponseEntity<>(offers, HttpStatus.OK);
+
     }
 
 
