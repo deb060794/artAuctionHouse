@@ -1,1 +1,32 @@
-<p>recent-orders works!</p>
+<app-user-navigation></app-user-navigation>
+<div class="container">
+    <h2 class="text-center mt-3">My Orders</h2>
+    <div *ngIf="orders && orders.length > 0;">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12" *ngFor="let order of orders">
+                <div class="card mb-4 shadow-sm" *ngIf = "order.art != null;">
+                    
+                    <img [src]="order.art.imageUrl.replace('\\\\', '/')" class="card-img-top" alt="{{ order.art.title }}" (click)="placeBid(order.art.id)" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ order.art.title }}</h5>
+                        <p class="card-text">
+                            Order Date:<strong>{{ order.orderDate }}</strong>
+                        </p>
+                        <p class="card-text">
+                            order amount:<strong>{{ order.totalPrice | currency:'EUR':'symbol':'1.2-2' }}</strong>
+                        </p>
+                        <div class="card-text">
+                           Status:
+                            <strong>{{ order.state }}</strong>
+                          </div>
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
